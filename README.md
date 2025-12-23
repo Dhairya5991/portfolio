@@ -72,7 +72,7 @@ npm start
 
 5. Open your browser and navigate to:
 ```
-http://localhost:3000
+http://localhost:8000
 ```
 
 ### Available Scripts
@@ -88,7 +88,7 @@ http://localhost:3000
 
 1. Ensure your resume PDF is in the project root:
 ```bash
-ls Dhairyashil_Pansare-CV-2025.pdf
+ls Dhairyashil_Pansare_Resume.pdf
 ```
 
 2. Build the Docker image:
@@ -100,19 +100,19 @@ docker build -t dhairyashil-portfolio:latest .
 
 Run the container on port 80:
 ```bash
-docker run -d -p 80:80 --name portfolio dhairyashil-portfolio:latest
+docker run -d -p 8000:8000 --name portfolio portfolio:latest
 ```
 
 Or run on a different port (e.g., 8080):
 ```bash
-docker run -d -p 8080:80 --name portfolio dhairyashil-portfolio:latest
+docker run -d -p 8000:8000 --name portfolio portfolio:latest
 ```
 
 ### Accessing the Application
 
 Open your browser and navigate to:
 - Local: `http://localhost`
-- Custom port: `http://localhost:8080`
+- Custom port: `http://localhost:8000`
 
 ### Docker Management Commands
 
@@ -133,7 +133,7 @@ docker start portfolio
 docker rm portfolio
 
 # Remove the image
-docker rmi dhairyashil-portfolio:latest
+docker rmi portfolio:latest
 ```
 
 ## Docker Compose (Optional)
@@ -146,10 +146,10 @@ version: '3.8'
 services:
   portfolio:
     build: .
-    image: dhairyashil-portfolio:latest
+    image: portfolio:latest
     container_name: portfolio
     ports:
-      - "80:80"
+      - "8000:8000"
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/"]
@@ -174,25 +174,25 @@ docker-compose up -d
 4. Build and run:
 ```bash
 docker build -t portfolio .
-docker run -d -p 80:80 --restart unless-stopped portfolio
+docker run -d -p 8000:8000 --restart unless-stopped portfolio
 ```
 
 ### Docker Hub Deployment
 
 1. Tag your image:
 ```bash
-docker tag dhairyashil-portfolio:latest yourusername/dhairyashil-portfolio:latest
+docker tag portfolio:latest yourusername/portfolio:latest
 ```
 
 2. Push to Docker Hub:
 ```bash
-docker push yourusername/dhairyashil-portfolio:latest
+docker push yourusername/portfolio:latest
 ```
 
 3. Pull and run on any server:
 ```bash
-docker pull yourusername/dhairyashil-portfolio:latest
-docker run -d -p 80:80 yourusername/dhairyashil-portfolio:latest
+docker pull yourusername/portfolio:latest
+docker run -d -p 8000:8000 yourusername/portfolio:latest
 ```
 
 ### Kubernetes Deployment
@@ -216,9 +216,9 @@ spec:
     spec:
       containers:
       - name: portfolio
-        image: dhairyashil-portfolio:latest
+        image: portfolio:latest
         ports:
-        - containerPort: 80
+        - containerPort: 8000
 ---
 apiVersion: v1
 kind: Service
@@ -227,8 +227,8 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-  - port: 80
-    targetPort: 80
+  - port: 8000
+    targetPort: 8000
   selector:
     app: portfolio
 ```
@@ -264,11 +264,11 @@ The Docker image includes:
 
 ### Port already in use
 ```bash
-# Find process using port 80
-sudo lsof -i :80
+# Find process using port 8000
+sudo lsof -i :8000
 
 # Use a different port
-docker run -d -p 8080:80 portfolio
+docker run -d -p 8080:8000 portfolio
 ```
 
 ### Container won't start
@@ -297,7 +297,7 @@ Modify Tailwind classes in the component:
 - `text-purple-500` - Secondary accent color
 
 ### Update Resume
-Replace `Dhairyashil_Pansare-CV-2025.pdf` in the `public` folder with your updated CV.
+Replace `Dhairyashil_Pansare_Resume.pdf` in the `public` folder with your updated CV.
 
 ## Browser Support
 
