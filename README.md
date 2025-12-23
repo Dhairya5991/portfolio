@@ -62,7 +62,7 @@ npm install
 
 3. Place your resume PDF in the `public` folder:
 ```bash
-cp Dhairyashil_Pansare-CV-2025.pdf public/
+cp Dhairyashil_Pansare_Resume.pdf public/
 ```
 
 4. Start the development server:
